@@ -10,6 +10,5 @@ public class allPeopleResponseModel {
 
     public void setData(models.data data) {
         this.data = data;
-
     }
 }
