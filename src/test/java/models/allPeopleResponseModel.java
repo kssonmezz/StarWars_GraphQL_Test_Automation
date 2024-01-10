@@ -1,5 +1,4 @@
 package models;
-import java.util.List;
 
 public class allPeopleResponseModel {
 
@@ -11,5 +10,6 @@ public class allPeopleResponseModel {
 
     public void setData(models.data data) {
         this.data = data;
+
     }
 }
