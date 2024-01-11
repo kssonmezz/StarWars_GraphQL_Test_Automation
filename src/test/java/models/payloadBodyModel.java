@@ -7,7 +7,9 @@ import java.util.Map;
 
 public class payloadBodyModel {
 
-     String query;
+    String query;
+    Map<String,String> variables;
+    String operationName;
 
     public Map<String, String> getVariables() {
         return variables;
@@ -16,9 +18,6 @@ public class payloadBodyModel {
     public void setVariables(Map<String, String> variables) {
         this.variables = variables;
     }
-
-    Map<String,String> variables;
-     String operationName;
 
     public String getQuery() {
         return query;

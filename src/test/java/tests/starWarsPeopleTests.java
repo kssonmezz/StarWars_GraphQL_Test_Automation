@@ -27,7 +27,7 @@ public class starWarsPeopleTests {
            .build();
 
    @Test
-   public void getaAllPeople() throws JsonProcessingException {
+   public String getaAllPeople() throws JsonProcessingException {
       payloadBodyModel payload = new payloadBodyModel();
       payload.setQuery("query ExampleQuery {\n \n  allPeople {\n    people {\n      id\n      name\n    }\n  }\n}\n");
       Map<String, String> emptyMap =new HashMap<>();
@@ -37,6 +37,7 @@ public class starWarsPeopleTests {
       allPeopleResponseModel response =given().spec(req).body(payload)
               .when().post("/.netlify/functions/index")
               .then().extract().response().as(allPeopleResponseModel.class);
+
       ObjectMapper objectMapper = new ObjectMapper();
       String jsonString = objectMapper.writeValueAsString(response.getData());
       System.out.println("JSON String: " + jsonString);
@@ -52,18 +53,18 @@ public class starWarsPeopleTests {
          ids.add(idValue);
       }
 
-      String firstName= ids.get(0);
+      return ids.get(0);
 
    }
 
 
    @Test
-   public void getAPerson() {
+   public void getAPerson() throws JsonProcessingException {
 
       payloadBodyModel payload2 = new payloadBodyModel();
       payload2.setQuery("query ExampleQuery($personId: ID) {\n \n  person(id: $personId) {\n    name\n  }\n}\n");
       Map<String, String> variables = new HashMap<>();
-      variables.put("personId", "cGVvcGxlOjE="); // Assuming "personId" is the key and "cGVvcGxlOjE=" is the value
+      variables.put("personId", getaAllPeople()); // Assuming "personId" is the key and "cGVvcGxlOjE=" is the value
       payload2.setVariables(variables);
       payload2.setOperationName("ExampleQuery");
 
